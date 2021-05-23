@@ -5,6 +5,7 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>com.example.LbtHdr</class>
     <class>com.example.LbtTyp</class>
+    <class>com.example.SsnTyp</class>
     <properties>
         <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
         <property name="javax.persistence.jdbc.url"    value="jdbc:h2:mem:test" />
@@ -15,6 +16,7 @@
         <property name="eclipselink.logging.level" value="FINE"/>
         <property name="eclipselink.logging.level.sql" value="FINE"/>
         <property name="eclipselink.logging.parameters" value="true"/>
+        <property name="eclipselink.weaving" value="static"/>
       </properties>
   </persistence-unit>
 </persistence>

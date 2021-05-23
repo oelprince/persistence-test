@@ -1,7 +1,5 @@
 package com.example;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.Iterator;
 import java.util.List;
 
@@ -11,11 +9,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-{
+public class AppTest2 {
+
     private EntityManager entityManager;
 
     @Before
@@ -26,22 +21,23 @@ public class AppTest
     
 
     @Test
-    public void testValidationBug() {       
-        LbtHdr lbtHdr = saveLbtHdr(1L);
-        Assert.assertNotNull(lbtHdr);
-        listLbtHdr();
+    public void testCharTypeValidation() {
+      LbtHdr lbtHdr = saveLbtHdrWithSsnTyp(2L);
+      Assert.assertNotNull(lbtHdr);
+      listLbtHdrWithSsnTyp();
     }
 
-    public void listLbtHdr() {
+    
+    public void listLbtHdrWithSsnTyp() {
       try {
         entityManager.getTransaction().begin();
         @SuppressWarnings("unchecked")
-        List<LbtHdr> lbtHdrs = entityManager.createQuery("select x from LbtHdr x where x.ntrnlLbtHdr = 1").getResultList();
+        List<LbtHdr> lbtHdrs = entityManager.createQuery("select x from LbtHdr x where x.ntrnlLbtHdr = 2").getResultList();
         Assert.assertTrue(lbtHdrs.size() > 0);
         for (Iterator<LbtHdr> iterator = lbtHdrs.iterator(); iterator.hasNext();) {
           LbtHdr lbtHdr = (LbtHdr) iterator.next();
           System.out.println("id = " + lbtHdr.getNtrnlLbtHdr());
-          Assert.assertEquals(Long.valueOf(1L), lbtHdr.getNtrnlLbtHdr());
+          Assert.assertEquals(Long.valueOf(2L), lbtHdr.getNtrnlLbtHdr());
         }
         entityManager.getTransaction().commit();
       } catch (Exception e) {
@@ -50,16 +46,26 @@ public class AppTest
         entityManager.getTransaction().rollback();
       }
     }
+
     
-    public LbtHdr saveLbtHdr(Long lbtHdrId) {
+  
+    
+
+    public LbtHdr saveLbtHdrWithSsnTyp(Long lbtHdrId) {
       LbtHdr lbtHdr = new LbtHdr();
       try {
         entityManager.getTransaction().begin();
         lbtHdr.setNtrnlLbtHdr(lbtHdrId);
         LbtTyp lbtTyp = new LbtTyp();
-        lbtTyp.setLbtTypCd(Integer.valueOf(0));
+        lbtTyp.setLbtTypCd(Integer.valueOf(1));
   
         lbtHdr.setLbtTypCd(lbtTyp);
+
+        SsnTyp ssnTyp = new SsnTyp();
+        ssnTyp.setSsnTypCd('0');
+
+        lbtHdr.setSsnTypCd(ssnTyp);
+
         lbtHdr = entityManager.merge(lbtHdr);
         entityManager.getTransaction().commit();
       } catch (Exception e) {
@@ -69,7 +75,5 @@ public class AppTest
       }
       return lbtHdr;
     }
-
-  
-
+    
 }

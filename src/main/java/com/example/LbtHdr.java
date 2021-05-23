@@ -26,6 +26,11 @@ public class LbtHdr implements Serializable {
     @ManyToOne
     private LbtTyp lbtTypCd;
 
+    @JoinColumn(name = "SSN_TYP_CD", referencedColumnName = "SSN_TYP_CD")
+    @ManyToOne
+    private SsnTyp ssnTypCd;
+    
+
     public Long getNtrnlLbtHdr() {
         return ntrnlLbtHdr;
     }
@@ -42,7 +47,14 @@ public class LbtHdr implements Serializable {
         this.lbtTypCd = lbtTypCd;
     }
 
-    
+
+    public SsnTyp getSsnTypCd() {
+        return ssnTypCd;
+    }
+
+    public void setSsnTypCd(SsnTyp ssnTypCd) {
+        this.ssnTypCd = ssnTypCd;
+    }
 
     @Override
     public int hashCode() {
@@ -50,6 +62,7 @@ public class LbtHdr implements Serializable {
         int result = 1;
         result = prime * result + ((lbtTypCd == null) ? 0 : lbtTypCd.hashCode());
         result = prime * result + ((ntrnlLbtHdr == null) ? 0 : ntrnlLbtHdr.hashCode());
+        result = prime * result + ((ssnTypCd == null) ? 0 : ssnTypCd.hashCode());
         return result;
     }
 
@@ -72,13 +85,20 @@ public class LbtHdr implements Serializable {
                 return false;
         } else if (!ntrnlLbtHdr.equals(other.ntrnlLbtHdr))
             return false;
+        if (ssnTypCd == null) {
+            if (other.ssnTypCd != null)
+                return false;
+        } else if (!ssnTypCd.equals(other.ssnTypCd))
+            return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "LbtHdr [lbtTypCd=" + lbtTypCd + ", ntrnlLbtHdr=" + ntrnlLbtHdr + "]";
+        return "LbtHdr [lbtTypCd=" + lbtTypCd + ", ntrnlLbtHdr=" + ntrnlLbtHdr + ", ssnTypCd=" + ssnTypCd + "]";
     }
+
+    
 
     
     

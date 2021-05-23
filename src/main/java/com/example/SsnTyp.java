@@ -13,24 +13,24 @@ import javax.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "LBT_TYP")
-public class LbtTyp implements Serializable {
-    
+@Table(name = "SSN_TYP")
+public class SsnTyp implements Serializable {
+
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "LBT_TYP_CD")
-    private Integer LbtTypCd;
+    @Column(name = "SSN_TYP_CD")
+    private char SsnTypCd;
 
-    @OneToMany(mappedBy = "lbtTypCd")
+    @OneToMany(mappedBy = "ssnTypCd")
     private List<LbtHdr> lbtHdrList;
 
-    public Integer getLbtTypCd() {
-        return LbtTypCd;
+    public char getSsnTypCd() {
+        return SsnTypCd;
     }
 
-    public void setLbtTypCd(Integer lbtTypCd) {
-        LbtTypCd = lbtTypCd;
+    public void setSsnTypCd(char ssnTypCd) {
+        SsnTypCd = ssnTypCd;
     }
 
     public List<LbtHdr> getLbtHdrList() {
@@ -47,7 +47,7 @@ public class LbtTyp implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((LbtTypCd == null) ? 0 : LbtTypCd.hashCode());
+        result = prime * result + SsnTypCd;
         result = prime * result + ((lbtHdrList == null) ? 0 : lbtHdrList.hashCode());
         return result;
     }
@@ -60,11 +60,8 @@ public class LbtTyp implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        LbtTyp other = (LbtTyp) obj;
-        if (LbtTypCd == null) {
-            if (other.LbtTypCd != null)
-                return false;
-        } else if (!LbtTypCd.equals(other.LbtTypCd))
+        SsnTyp other = (SsnTyp) obj;
+        if (SsnTypCd != other.SsnTypCd)
             return false;
         if (lbtHdrList == null) {
             if (other.lbtHdrList != null)
@@ -76,8 +73,7 @@ public class LbtTyp implements Serializable {
 
     @Override
     public String toString() {
-        return "LbtTyp [LbtTypCd=" + LbtTypCd + ", lbtHdrList=" + lbtHdrList + "]";
-    }
-  
+        return "SsnTyp [SsnTypCd=" + SsnTypCd + ", lbtHdrList=" + lbtHdrList + "]";
+    } 
     
 }
